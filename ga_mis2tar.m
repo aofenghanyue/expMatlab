@@ -1,5 +1,5 @@
 function err = ga_mis2tar(opti_param)
-% ÓÅ»¯ÊäÈëµÄ²ÎÊı
+% ä¼˜åŒ–è¾“å…¥çš„å‚æ•°
     alpha = opti_param;
     beta = 0;
     err = mis2tar(alpha, beta);

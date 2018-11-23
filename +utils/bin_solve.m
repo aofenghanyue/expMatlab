@@ -1,21 +1,21 @@
-%%  ¶þ·Ö·¨Çó¸ù
+%%  äºŒåˆ†æ³•æ±‚æ ¹
 %   matlab 2017b
 function x_0 = bin_solve(fun,a,b,sup_acu,maxiter)
 %   function [x_0, err] = bin_solve(fun,a,b,sup_acu,maxiter)
-%	¶þ·Ö·¨Çó¸ù
-%   ÊäÈë£º
-%   fun£º´ýÇó¸ùµÄº¯Êý
-%   a£¬b£ºÇó¸ùÇø¼ä
+%	äºŒåˆ†æ³•æ±‚æ ¹
+%   è¾“å…¥ï¼š
+%   funï¼šå¾…æ±‚æ ¹çš„å‡½æ•°
+%   aï¼Œbï¼šæ±‚æ ¹åŒºé—´
 %   sup_acu: max|x(k)-x(k-1)|
-%   maxiter: ×î´óµü´ú´ÎÊý
-%   Êä³ö£ºx_0:Áãµã   err£º¾«¶È/Îó²î¹À¼Æ
+%   maxiter: æœ€å¤§è¿­ä»£æ¬¡æ•°
+%   è¾“å‡ºï¼šx_0:é›¶ç‚¹   errï¼šç²¾åº¦/è¯¯å·®ä¼°è®¡
 a = a-eps;
 b = b+eps;
-% ÕâÀïa-eps,b+epsÊÇÎªÁË·ÀÖ¹ÁãµãÈ¡ÔÚ¶ËµãÊ±±¨´í
+% è¿™é‡Œa-eps,b+epsæ˜¯ä¸ºäº†é˜²æ­¢é›¶ç‚¹å–åœ¨ç«¯ç‚¹æ—¶æŠ¥é”™
 fa = feval(fun,a);
 fb = feval(fun,b);
 if fa*fb>0
-    error('³¼æª×ö²»µ½°¡£þ¤Ø£þ£¡£¡');
+    error('è‡£å¦¾åšä¸åˆ°å•Šï¿£ã¸ï¿£ï¼ï¼');
 end
 if nargin<5
     maxiter  = 60;

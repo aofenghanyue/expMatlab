@@ -1,4 +1,4 @@
-% ÖÊµãÀà
+% è´¨ç‚¹ç±»
 classdef Particle
     properties
         x = 0;
@@ -11,18 +11,18 @@ classdef Particle
     end
     
     properties (Constant)
-        % »·¾³²ÎÊı
+        % ç¯å¢ƒå‚æ•°
         g = 9.8;
-        % ´óÆøÃÜ¶È
+        % å¤§æ°”å¯†åº¦
         rho = @(h)(1.225*exp(-0.00015*h));
-        % µ±µØÉùËÙ c=sqrt(gamma*R*T)(h<11000m)
+        % å½“åœ°å£°é€Ÿ c=sqrt(gamma*R*T)(h<11000m)
         c = @(h)(sqrt(1.4*286.85*(288.15-0.0065*h)));
     end
     
     methods
-        % ·½·¨
+        % æ–¹æ³•
         function particle = Particle(x,y,z,vx,vy,vz)
-            % ³õÊ¼»¯ÖÊµã¶ÔÏó£¬Ö¸¶¨ÖÊµãÎ»ÖÃ¡¢ËÙ¶È
+            % åˆå§‹åŒ–è´¨ç‚¹å¯¹è±¡ï¼ŒæŒ‡å®šè´¨ç‚¹ä½ç½®ã€é€Ÿåº¦
             if nargin == 6
                 particle.x = x;
                 particle.y = y;
@@ -34,18 +34,18 @@ classdef Particle
         end
         
         function v = getv(particle)
-            % µÃµ½µ±Ç°ÖÊµãµÄËÙ¶È
+            % å¾—åˆ°å½“å‰è´¨ç‚¹çš„é€Ÿåº¦
             v = sqrt(particle.vx^2 + particle.vy^2 + particle.vz^2);
         end
             
         function r = distance(part1, part2)
-            % µ±Ç°ÖÊµãÓëÖÊµãpart2µÄ¾àÀë
+            % å½“å‰è´¨ç‚¹ä¸è´¨ç‚¹part2çš„è·ç¦»
             r = sqrt((part1.x-part2.x)^2 + (part1.y-part2.y)^2 ...
                 + (part1.z-part2.z)^2);
         end
         
         function [q_yaw, q_pitch] = angle_sight(part1, part2)
-            % part1Ïà¶ÔÓÚpart2µÄÊÓÏß½Ç
+            % part1ç›¸å¯¹äºpart2çš„è§†çº¿è§’
             q_yaw = atan((part1.z-part2.z)/(part1.x-part2.x));
             q_pitch = asin((part2.y-part1.y)/distance(part1,part2));
         end

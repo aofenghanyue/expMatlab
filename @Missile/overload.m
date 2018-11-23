@@ -1,5 +1,5 @@
 function [n_y, n_z] = overload(mis, tar)
-% Çóµ±Ç°µ¼µ¯µ½Ä¿±êµÄÊµ¼Ê¹ıÔØ
+% æ±‚å½“å‰å¯¼å¼¹åˆ°ç›®æ ‡çš„å®é™…è¿‡è½½
     [n_yn, n_zn] = overload_n(mis, tar);
     [n_ya, n_za] = overload_a(mis);
     n_y = min(abs(n_yn), abs(n_ya)) * sign(n_yn);
@@ -7,11 +7,11 @@ function [n_y, n_z] = overload(mis, tar)
 end
     
 function [n_yn, n_zn] = overload_n(mis, tar)
-% ĞèÓÃ¹ıÔØ
+% éœ€ç”¨è¿‡è½½
     [q_yaw, q_pitch] = mis.angle_sight(tar);
     
     R = distance(mis, tar);
-    % Ïà¶ÔÔË¶¯ dR¡¢dq_yaw¡¢dq_yaw 
+    % ç›¸å¯¹è¿åŠ¨ dRã€dq_yawã€dq_yaw 
     dR = -mis.V*cos(mis.theta)*cos(q_pitch)*cos(mis.psi_c+q_yaw)+...
         (tar.vx*cos(q_pitch)*cos(q_yaw)+tar.vy*sin(q_pitch)+...
         tar.vz*cos(q_pitch)*sin(q_yaw));
@@ -21,17 +21,17 @@ function [n_yn, n_zn] = overload_n(mis, tar)
         sin(mis.theta)*cos(q_pitch))-tar.vx*sin(q_pitch)*cos(q_yaw)+...
         tar.vy*cos(q_pitch)-tar.vz*sin(q_pitch)*sin(q_yaw));
 
-    % Ö¸Áî¼ÓËÙ¶È
+    % æŒ‡ä»¤åŠ é€Ÿåº¦
     a_yc = -mis.K * dR * dq_pitch / cos(q_yaw-mis.theta);
     a_zc = -mis.K * dR * dq_yaw / cos(q_pitch-mis.psi_c) * cos(q_pitch);
 
-    % ĞèÓÃ¹ıÔØ
+    % éœ€ç”¨è¿‡è½½
     n_yn=a_yc/mis.g + cos(mis.theta);
     n_zn=a_zc/mis.g;
 end
 
 function [n_ya, n_za] = overload_a(mis)
-% ¿ÉÓÃ¹ıÔØ
+% å¯ç”¨è¿‡è½½
     n_ya = (mis.push()*sin(mis.alpha_max)...
         + mis.Y(mis.V,mis.y,mis.alpha_max)) / mis.m() / mis.g;
     n_za = (-mis.push()*cos(mis.alpha_max)*sin(mis.beta_max)...

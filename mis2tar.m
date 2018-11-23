@@ -1,13 +1,13 @@
 function err = mis2tar(alpha_list, beta_list)
-% µ¼µ¯´ò»÷Ä¿±êÖ÷³ÌĞò
-% ÊäÈë£ºdeg
-% alpha_list: 1. ÁĞ±í£¬¹¥½ÇÃ¿nÃë°´ÁĞ±íÀïµÄÖµ±ä»¯Ò»´Î
-%                 (n¿ÉÒÔÔÚutils.point_to_funÀïÉè¶¨£¬Ä¬ÈÏÎª5)
-%             2. µ¥¸öÖµ£¬¹¥½ÇÎª¶¨Öµ
-% beta_list: ²à»¬½Ç£¬ÓÃ·¨Í¬alpha_list
-% Êä³ö£ºµ¼Òı¶Î½áÊøÊ±µÄÆ«²î
+% å¯¼å¼¹æ‰“å‡»ç›®æ ‡ä¸»ç¨‹åº
+% è¾“å…¥ï¼šdeg
+% alpha_list: 1. åˆ—è¡¨ï¼Œæ”»è§’æ¯nç§’æŒ‰åˆ—è¡¨é‡Œçš„å€¼å˜åŒ–ä¸€æ¬¡
+%                 (nå¯ä»¥åœ¨utils.point_to_funé‡Œè®¾å®šï¼Œé»˜è®¤ä¸º5)
+%             2. å•ä¸ªå€¼ï¼Œæ”»è§’ä¸ºå®šå€¼
+% beta_list: ä¾§æ»‘è§’ï¼Œç”¨æ³•åŒalpha_list
+% è¾“å‡ºï¼šå¯¼å¼•æ®µç»“æŸæ—¶çš„åå·®
 
-    % ½¨Á¢µ¼µ¯¡¢Ä¿±ê¶ÔÏó
+    % å»ºç«‹å¯¼å¼¹ã€ç›®æ ‡å¯¹è±¡
     % x,y,z,vx,vy,vz
     targ = Particle(30000, 0, 0, 0, 0, 0);
     % x,y,z,V,theta,psi_c,alpha,beta
@@ -15,10 +15,10 @@ function err = mis2tar(alpha_list, beta_list)
     mis = mis.params_set();
     while true
         if mis.is_proj_fly(targ)
-            % ÅĞ¶ÏÊÇ·ñ·½°¸µ¯µÀ
+            % åˆ¤æ–­æ˜¯å¦æ–¹æ¡ˆå¼¹é“
             mis = mis.step(targ, 0);
         elseif mis.is_guided(targ)
-            % ÅĞ¶ÏÊÇ·ñµ¼Òıµ¯µÀ
+            % åˆ¤æ–­æ˜¯å¦å¯¼å¼•å¼¹é“
             mis = mis.step(targ, 1);
         else
             break;

@@ -1,4 +1,4 @@
-% µ¼µ¯
+% å¯¼å¼¹
 classdef Missile < Particle
     properties
         t = 0;
@@ -6,30 +6,30 @@ classdef Missile < Particle
         psi_c = 0;
         alpha = 0;
         beta = 0;
-        ft_alpha;	% ·½°¸¹¥½Ç
-        ft_beta;	% ·½°¸²à»¬½Ç
-        traj;       % µ¯µÀ
+        ft_alpha;	% æ–¹æ¡ˆæ”»è§’
+        ft_beta;	% æ–¹æ¡ˆä¾§æ»‘è§’
+        traj;       % å¼¹é“
     end
     properties
-        % ×Ô¶¨Òå
+        % è‡ªå®šä¹‰
         step_time = 0;
-        guide_dis_max = 12000; % ×î´óµ¼Òı¾àÀë
-        guide_dis_min = 200;  % ×î´óµ¼Òı¾àÀë
-        K = 4;      % µ¼Òı¶Î±ÈÀıÏµÊı
-        s;          % ²Î¿¼Ãæ»ı
+        guide_dis_max = 12000; % æœ€å¤§å¯¼å¼•è·ç¦»
+        guide_dis_min = 200;  % æœ€å¤§å¯¼å¼•è·ç¦»
+        K = 4;      % å¯¼å¼•æ®µæ¯”ä¾‹ç³»æ•°
+        s;          % å‚è€ƒé¢ç§¯
         CL_Ma_alpha;
         CD_Ma_alpha;
         Ma_point;
         alpha_point;
-        alpha_max;  % ×î´ó¹¥½Ç
-        beta_max;   % ×î´ó²à»¬½Ç
-        ft_push;	% ÍÆÁ¦
-        ft_m;       % ÖÊÁ¿
+        alpha_max;  % æœ€å¤§æ”»è§’
+        beta_max;   % æœ€å¤§ä¾§æ»‘è§’
+        ft_push;	% æ¨åŠ›
+        ft_m;       % è´¨é‡
     end
     methods
         function mis = Missile(x,y,z,V,theta,psi_c,alpha,beta,tar)
-            % ³õÊ¼»¯µ¼µ¯
-            % alpha¡¢betaÎªlist(µ¥Î»£º¡ã)£¬ÊäÈë·Ö¶Îº¯ÊıµÄ¸÷¶ÎÖµ
+            % åˆå§‹åŒ–å¯¼å¼¹
+            % alphaã€betaä¸ºlist(å•ä½ï¼šÂ°)ï¼Œè¾“å…¥åˆ†æ®µå‡½æ•°çš„å„æ®µå€¼
             import utils.point_to_fun
             mis = mis@Particle(x,y,z,0,0,0);
             mis.V = V;
@@ -41,24 +41,24 @@ classdef Missile < Particle
             mis.ft_beta = point_to_fun(degtorad(beta));
         end
         function res = push(mis)
-            % »ñÈ¡µ±Ç°ÍÆÁ¦
+            % è·å–å½“å‰æ¨åŠ›
             res = mis.ft_push(mis.t);
         end
         function res = m(mis)
-            % »ñÈ¡µ±Ç°ÖÊÁ¿
+            % è·å–å½“å‰è´¨é‡
             res = mis.ft_m(mis.t);
         end
         function res = get_mach(mis)
-            % »ñÈ¡µ±Ç°µ¼µ¯ÂíºÕÊı
+            % è·å–å½“å‰å¯¼å¼¹é©¬èµ«æ•°
             v = mis.getv();
             res = mis.Mach(v, mis.y);
         end
         function res = C_inf(mis)
-            % »ñµÃµ±Ç°À´Á÷×ÜÑ¹
+            % è·å¾—å½“å‰æ¥æµæ€»å‹
             res = 0.5*mis.rho(mis.y)*(mis.getv())^2*mis.s;
         end
         function res = get_Y(mis)
-            % »ñÈ¡µ±Ç°ÉıÁ¦
+            % è·å–å½“å‰å‡åŠ›
             res = mis.Y(mis.getv(), mis.y, mis.alpha);
         end
         function res = get_X(mis)
@@ -74,11 +74,11 @@ classdef Missile < Particle
             mis.vz = mis.V * cos(mis.theta) * sin(mis.psi_c);
         end
         function res = Mach(mis, V, h)
-            % Í¨¹ıËÙ¶È¡¢¸ß¶È£¬ÇóÂíºÕÊı
+            % é€šè¿‡é€Ÿåº¦ã€é«˜åº¦ï¼Œæ±‚é©¬èµ«æ•°
             res = V/mis.c(h);
         end
         function res = Y(mis, V, h, alpha)
-            % ¸ø¶¨¹¥½Ç¡¢ËÙ¶È¡¢¸ß¶È£¬ÇóÉıÁ¦
+            % ç»™å®šæ”»è§’ã€é€Ÿåº¦ã€é«˜åº¦ï¼Œæ±‚å‡åŠ›
             import utils.interp_2m
             Ma = mis.Mach(V, h);
             CL = sign(alpha)*interp_2m(mis.Ma_point, mis.alpha_point,...
@@ -86,7 +86,7 @@ classdef Missile < Particle
             res = mis.C_inf * CL;
         end
         function res = X(mis, V, h, alpha)
-            % ¸ø¶¨¹¥½Ç¡¢ËÙ¶È¡¢¸ß¶È£¬Çó×èÁ¦
+            % ç»™å®šæ”»è§’ã€é€Ÿåº¦ã€é«˜åº¦ï¼Œæ±‚é˜»åŠ›
             import utils.interp_2m
             Ma = mis.Mach(V, h);
             CD = interp_2m(mis.Ma_point, mis.alpha_point,...
@@ -102,7 +102,7 @@ classdef Missile < Particle
                 && (mis.y > 0);
         end
         function mis = traj_init(mis, tar)
-            % ´´½¨µ¯µÀ²ÎÊı´æ´¢¾ØÕó
+            % åˆ›å»ºå¼¹é“å‚æ•°å­˜å‚¨çŸ©é˜µ
             % [t, V, theta, psi_c, x, y, z, beta, alpha, n_y, n_z]
             columns = round((tar.x-mis.x) / (mis.vx-tar.vx));
             mis.traj = zeros(11, columns);
@@ -113,17 +113,17 @@ classdef Missile < Particle
     end
 
     methods
-        % Éè¶¨µ¼µ¯²ÎÊı
+        % è®¾å®šå¯¼å¼¹å‚æ•°
         mis = params_set(mis)
-        % ÇóÊµ¼Ê¹ıÔØ
+        % æ±‚å®é™…è¿‡è½½
         [n_y, n_z] = overload(mis,target)
-        % Çóµ¼Òı¶Î¹¥½Ç¡¢²à»¬½Ç
+        % æ±‚å¯¼å¼•æ®µæ”»è§’ã€ä¾§æ»‘è§’
         [alpha_gt, beta_gt, n_y, n_z] = angle_gt(mis, target)
-        % ÔË¶¯Î¢·Ö·½³Ì
+        % è¿åŠ¨å¾®åˆ†æ–¹ç¨‹
         d_var = GTDE(mis, t, var)
-        % ²½½ø£º¼ÆËãÏÂÒ»²½µ¼µ¯×´Ì¬
+        % æ­¥è¿›ï¼šè®¡ç®—ä¸‹ä¸€æ­¥å¯¼å¼¹çŠ¶æ€
         mis = step(mis, tar, method)
-        % »­³öµ¼µ¯µ¯µÀ
+        % ç”»å‡ºå¯¼å¼¹å¼¹é“
         p = plot_traj(mis, tar)
     end
 end

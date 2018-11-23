@@ -1,7 +1,7 @@
 function mis = step(mis, tar, method)
-% ¸ù¾İmethodÀ´»ı·Ö£¬ÒÔ»ñµÃÏÂÒ»²½µ¼µ¯µÄ×´Ì¬
-% method = 0 : ·½°¸µ¯µÀ»ı·Ö
-% method = 1 : µ¼Òıµ¯µÀ»ı·Ö
+% æ ¹æ®methodæ¥ç§¯åˆ†ï¼Œä»¥è·å¾—ä¸‹ä¸€æ­¥å¯¼å¼¹çš„çŠ¶æ€
+% method = 0 : æ–¹æ¡ˆå¼¹é“ç§¯åˆ†
+% method = 1 : å¯¼å¼•å¼¹é“ç§¯åˆ†
 
     n = round(mis.t/mis.step_time) + 1;
     if method == 0
@@ -12,7 +12,7 @@ function mis = step(mis, tar, method)
 end
 
 function mis = step_project(mis, n)
-% ·½°¸µ¯µÀ
+% æ–¹æ¡ˆå¼¹é“
     mis.alpha = mis.ft_alpha(mis.t);
     mis.beta = mis.ft_beta(mis.t);
     var = [mis.V, mis.theta, mis.psi_c, mis.x, mis.y, mis.z];
@@ -34,7 +34,7 @@ function mis = step_project(mis, n)
 end
 
 function mis = step_guide(mis, tar, n)
-% µ¼Òıµ¯µÀ
+% å¯¼å¼•å¼¹é“
     [alpha_gt, beta_gt, n_y, n_z] = mis.angle_gt(tar);
     mis.alpha = alpha_gt;
     mis.beta = beta_gt;

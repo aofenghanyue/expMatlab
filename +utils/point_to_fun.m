@@ -1,8 +1,8 @@
 function k = point_to_fun(point_list)
-    % 将离散点变为分段函数
-    % 例如：fun = point_to_fun([1,2,3])
+    % 灏嗙鏁ｇ偣鍙樹负鍒嗘鍑芥暟
+    % 渚嬪锛歠un = point_to_fun([1,2,3])
     %               1 (0<=t<5)
-    % 则：fun(t) =  2 (5<=t<10)
+    % 鍒欙細fun(t) =  2 (5<=t<10)
     %               3 (10<=t<inf)
     
     function res = step_fun(t)

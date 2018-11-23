@@ -3,5 +3,5 @@ function plot_traj(mis, tar)
     plot(traj(5,:),traj(6,:))
     hold on
     plot(tar.x,tar.y,'*')
-    xlabel('x');ylabel('y');title('µ¯µÀÍ¼')
+    xlabel('x');ylabel('y');title('ÂµÂ¯ÂµÃ€ÃÂ¼')
 end
