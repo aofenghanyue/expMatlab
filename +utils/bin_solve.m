@@ -15,6 +15,10 @@ b = b+eps;
 fa = feval(fun,a);
 fb = feval(fun,b);
 if fa*fb>0
+	c = [a, b];
+	d = [abs(fa), abs(fb)];
+	x_0 = c(d==min(d))
+	return
     error('臣妾做不到啊￣へ￣！！');
 	
 end
