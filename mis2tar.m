@@ -20,6 +20,9 @@ function err = mis2tar(alpha_list, beta_list)
         elseif mis.is_guided(targ)
             % 判断是否导引弹道
             mis = mis.step(targ, 1);
+		elseif mis.y > 0
+			% 判断是否落地
+			mis = mis.step(targ, 2);
         else
             break;
         end
