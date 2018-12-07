@@ -9,7 +9,7 @@ function mis = step(mis, tar, method)
     elseif method == 1
         mis = step_guide(mis, tar, n);
 	elseif method == 2
-		mis = step_inert(mis, n)
+		mis = step_inert(mis, n);
     end
 end
 

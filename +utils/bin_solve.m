@@ -16,6 +16,7 @@ fa = feval(fun,a);
 fb = feval(fun,b);
 if fa*fb>0
     error('臣妾做不到啊￣へ￣！！');
+	
 end
 if nargin<5
     maxiter  = 60;
