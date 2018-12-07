@@ -1,5 +1,5 @@
 function mis = step(mis, tar, method)
-% 根据method来积分，以获得下�?步导弹的状�??
+% 根据method来积分，以获得下一步导弹的状态
 % method = 0 : 方案弹道积分
 % method = 1 : 导引弹道积分
 
@@ -60,11 +60,12 @@ function mis = step_guide(mis, tar, n)
 end
 
 function mis = step_inert(mis, n)
-% 惯�?�飞�?
+% 惯性飞行
 	mis.alpha = mis.traj(8,n-1);
     mis.beta = mis.traj(9,n-1);
 	mis.traj(8,n) = mis.alpha;
     mis.traj(9,n) = mis.beta;
+	var = [mis.V, mis.theta, mis.psi_c, mis.x, mis.y, mis.z];
 	
 	import utils.RK4_1
     mis.traj(2:7,n+1) = RK4_1(@mis.GTDE, mis.t, var, mis.step_time);
