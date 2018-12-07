@@ -22,7 +22,7 @@ function varargout = gui(varargin)
 
 % Edit the above text to modify the response to help gui
 
-% Last Modified by GUIDE v2.5 07-Dec-2018 17:39:03
+% Last Modified by GUIDE v2.5 07-Dec-2018 20:19:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -79,14 +79,14 @@ function pushbutton_start_op_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-set(handles.text22,'Visible','on')
+set(handles.text_wait,'Visible','on')
 % ga_mis2tar_start(nvars,lb,ub,PopulationSize_Data,MaxGenerations_Data)
-[alpha, err,~] = ga_mis2tar_start(1,-20,20,200,20)
-[mis, ~] = mis2tar(alpha,0)
-set(handles.text22,'Visible','off')
+[alpha, err,~] = ga_mis2tar_start(1,-20,20,200,20);
+[mis, tar, ~] = mis2tar(alpha,0);
+set(handles.text_wait,'Visible','off')
 figure(1)
 axes(handles.axes_traj)
-mis.plot_traj()
+mis.plot_traj(tar)
 % 显示结果
 set(handles.text18,'string',num2str(err))
 set(handles.text20,'string',num2str(alpha))
@@ -181,3 +181,35 @@ function edit6_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes during object creation, after setting all properties.
+function text_wait_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text_wait (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+guidata(hObject, handles)
+
+
+% --- Executes during object deletion, before destroying properties.
+function text_wait_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to text_wait (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+guidata(hObject, handles)
+
+
+% --- Executes during object creation, after setting all properties.
+function text20_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text20 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+guidata(hObject, handles)
+
+
+% --- Executes during object creation, after setting all properties.
+function text18_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to text18 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+guidata(hObject, handles)

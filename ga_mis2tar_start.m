@@ -6,5 +6,6 @@ options = optimoptions(options,'PopulationSize', PopulationSize_Data);
 options = optimoptions(options,'MaxGenerations', MaxGenerations_Data);
 options = optimoptions(options,'Display', 'off');
 options = optimoptions(options,'PlotFcn', { @gaplotbestf });
+options = optimoptions(options,'UseParallel', true);
 [x,fval,exitflag,output,population,score] = ...
 ga(@ga_mis2tar,nvars,[],[],[],[],lb,ub,[],[],options);
